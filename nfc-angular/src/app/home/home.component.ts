@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'my-home',
@@ -7,12 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
-    // Do stuff
-  }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
-    console.log('Hello Home');
+    this.api.getEmployees().subscribe(
+      x => {
+          console.log('VALUE RECEIVED: ', x);
+      },
+      x => {
+          console.log('ERROR: ', x);
+      },
+      () => {
+          console.log('Completed');
+      }
+    );
   }
 
 }
