@@ -1,17 +1,57 @@
-<header>
-  <nav>
-    <a [routerLink]="['']">Home</a>
-    <a [routerLink]="['about']">About</a>
-  </nav>
-</header>
-<main>
-  <h1>Hello from {{title}}!</h1>
+<div class="container">
+    <div class="col-xs-12">
 
-  <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <img src="/img/angular.png">
+        <div class="page-header">
+            <h1>
+                <!--<span>Angular2 DataTable component</span><br/>
+                <small>by mariuszfoltak</small>-->
+            </h1>
+        </div>
 
-  <router-outlet></router-outlet>
-</main>
-<footer>
-  <a [href]="url">Webpack Angular 2 Starter</a>
-</footer>
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">LISTADO DE EMPLEADOS</div>
+				<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+				    <thead>
+				    	<tr>
+			                <th>Busqueda por: </th>
+			                <th><input class="form-control" [(ngModel)]="filterQuery"/></th>
+			            </tr>
+					    <tr>
+					        <th style="width: 10%">
+					            <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+					        </th>
+					        <th style="width: 10%">
+					            <mfDefaultSorter by="lastName">Apellido	</mfDefaultSorter>
+					        </th>
+					        <th style="width: 10%">
+					            <mfDefaultSorter by="expedient">Legajo</mfDefaultSorter>
+					        </th>
+					         <th style="width: 10%">
+					            <mfDefaultSorter by="nfcTag">Tag Sube</mfDefaultSorter>
+					        </th>
+					         <th class="text-center" style="width: 10%" colspan="2">Opciones</th>
+					    </tr>
+					   
+				    </thead>
+				    <tbody>
+					    <tr *ngFor="let employee of mf.data">
+					        <td>{{ employee.name }}</td>
+					        <td>{{ employee.lastName }}</td>
+					        <td>{{ employee.expedient }}</td>
+					        <td>{{ employee.nfcTag }}</td>
+					        <td class="text-right"><button (click)="edit(employee)" class="btn btn-primary">Ver/Editar</button></td>
+					        <td class="text-left"><button (click)="remove(employee)" class="btn btn-danger">Eliminar</button></td>
+					    </tr>
+				    </tbody>
+				    <tfoot>
+					    <tr>
+					        <td colspan="6">
+					            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]">Cantidad de Elementos por Paginá</mfBootstrapPaginator>
+					        </td>
+					    </tr>
+				    </tfoot>
+				</table>
+        </div>
+    </div>
+</div>
+
