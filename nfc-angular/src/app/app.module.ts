@@ -4,8 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular2-datatable';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { AppComponent } from './components/app.component';
+import { ApiComponent } from './Api Service/Api.component';
 import { AboutComponent } from './about/about.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
@@ -22,7 +22,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
+    ApiComponent,
     AboutComponent
   ],
   providers: [

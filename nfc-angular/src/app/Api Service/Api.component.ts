@@ -3,11 +3,11 @@ import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'my-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: './Api.component.html',
+  styleUrls: ['./Api.component.scss']
 })
 
-export class HomeComponent implements OnInit {
+export class ApiComponent implements OnInit {
 
   constructor(private api: ApiService) { }
 
