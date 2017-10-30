@@ -1,0 +1,35 @@
+<div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<ng-content select=".app-modal-header"></ng-content>
+			</div>
+			<div class="modal-body">
+				<div class="app-modal-body">
+					<label for="name">Nombre</label>
+					<input type="text" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
+					 placeholder="{{employee.name}}" value="{{employee.name}}">
+					<label for="lastName">Apellido</label>
+					<input type="text" class="form-control" id="lastName" [disabled]="!edit" [(ngModel)]="employee.lastName" name="lastName"
+					 #lastName="ngModel" placeholder="{{employee.lastName}}" value="{{employee.lastName}}">
+					<label for="expedient">Expediente</label>
+					<input type="text" class="form-control" id="expedient" [disabled]="!edit" [(ngModel)]="employee.expedient" name="expedient"
+					 #expedient="ngModel" placeholder="{{employee.expedient}}" value="{{employee.expedient}}">
+					<label for="nfcTag">Codigo SUBE</label>
+					<input type="text" class="form-control" id="nfcTag" [disabled]="!edit" [(ngModel)]="employee.nfcTag" name="nfcTag" #nfcTag="ngModel"
+					 placeholder="{{employee.nfcTag}}" value="{{employee.nfcTag}}">
+					<label for="status">Status</label>
+					<input type="text" class="form-control" id="status" [disabled]="!edit" [(ngModel)]="employee.status" name="status" #nfcTag="ngModel"
+					 placeholder="{{employee.status}}" value="{{employee.status}}">
+				</div>
+			</div>
+
+			<div class="app-modal-footer">
+				<button type="button" class="btn btn-default" (click)="hide()">Cerrar</button>
+				<button *ngIf="edit" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+			</div>
+
+		</div>
+
+	</div>
+</div>

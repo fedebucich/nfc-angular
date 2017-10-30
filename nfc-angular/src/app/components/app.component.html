@@ -2,10 +2,7 @@
     <div class="col-xs-12">
 
         <div class="page-header">
-            <h1>
-                <!--<span>Angular2 DataTable component</span><br/>
-                <small>by mariuszfoltak</small>-->
-            </h1>
+            <h1></h1>
         </div>
 
         <div class="panel panel-default">
@@ -28,19 +25,24 @@
 					        </th>
 					         <th style="width: 10%">
 					            <mfDefaultSorter by="nfcTag">Tag Sube</mfDefaultSorter>
-					        </th>
-					         <th class="text-center" style="width: 10%" colspan="2">Opciones</th>
+							</th>
+							<th style="width: 10%">
+									<mfDefaultSorter by="nfcTag">Status</mfDefaultSorter>
+								</th>
+					         <th class="text-center" style="width: 10%" colspan="3">Opciones</th>
 					    </tr>
 					   
 				    </thead>
 				    <tbody>
-					    <tr *ngFor="let employee of mf.data">
+					    <tr *ngFor="let employee of mf.data let i = index" [attr.data-index]="i">
 					        <td>{{ employee.name }}</td>
 					        <td>{{ employee.lastName }}</td>
 					        <td>{{ employee.expedient }}</td>
-					        <td>{{ employee.nfcTag }}</td>
-					        <td class="text-right"><button (click)="edit(employee)" class="btn btn-primary">Ver/Editar</button></td>
-					        <td class="text-left"><button (click)="remove(employee)" class="btn btn-danger">Eliminar</button></td>
+							<td>{{ employee.nfcTag }}</td>
+							<td>{{ employee.status }}</td>
+							<td class="text-right"><button type="button" (click)="modal.show(employee,false)" class="btn btn-primary">Ver</button></td>
+					        <td class="text-right"><button type="button" (click)="modal.show(employee,true)" class="btn btn-primary">Editar</button></td>
+					        <td class="text-left"><button (click)="remove(i)" class="btn btn-danger">Eliminar</button></td>
 					    </tr>
 				    </tbody>
 				    <tfoot>
@@ -51,7 +53,12 @@
 					    </tr>
 				    </tfoot>
 				</table>
-        </div>
-    </div>
+				
+		</div>
+		<button type="button" (click)="modal.show(undefined,true)" class="btn btn-primary">Nuevo empleado</button>
+	</div>
+	<employee-modal [onFinish]="onFinish" #modal>
+	  <div class="app-modal-header">Empleado</div>
+	</employee-modal>
 </div>
 
