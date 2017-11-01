@@ -7,6 +7,7 @@ import { DataTableModule } from 'angular2-datatable';
 import { AppComponent } from './components/app.component';
 import { ApiComponent } from './Api Service/Api.component';
 import { AboutComponent } from './about/about.component';
+import { EmployeeModalComponent } from './components/employee/edit-view.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
@@ -23,7 +24,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   declarations: [
     AppComponent,
     ApiComponent,
-    AboutComponent
+    AboutComponent,
+    EmployeeModalComponent
   ],
   providers: [
     ApiService
