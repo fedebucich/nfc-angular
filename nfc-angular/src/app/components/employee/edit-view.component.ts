@@ -19,11 +19,14 @@ export class EmployeeModalComponent {
 
   constructor(private api: ApiService) {}
 
-  public show(employee: string, edit: boolean): void {
+  public show(employee: any, edit: boolean): void {
+		console.log("employee ", employee)
 		if (!employee) {
 			this.api.getCode().subscribe(data => {
+				console.log("new")
 				this.newEmployee = true;
 				this.employee = {
+					_id: "",
 					name: "",
 					lastName: "",
 					expedient: "",
@@ -33,6 +36,8 @@ export class EmployeeModalComponent {
 				}
 			});			
 		} else {
+			this.newEmployee = false;
+			console.log("not new")
 			this.employee = employee;
 		}
 		this.edit = edit;
@@ -48,6 +53,7 @@ export class EmployeeModalComponent {
   public save() {
 		if (this.newEmployee) {
 			this.api.createEmploye(this.employee).subscribe(data => {
+				console.log("id ", data._id);
 				this.onFinish(data);
 				console.log("EMPLOYEE updated: ", data);
 			});
