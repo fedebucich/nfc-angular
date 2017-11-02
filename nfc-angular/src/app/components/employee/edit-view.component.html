@@ -26,7 +26,8 @@
 
 			<div class="app-modal-footer">
 				<button type="button" class="btn btn-default" (click)="hide()">Cerrar</button>
-				<button *ngIf="edit" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+				<button *ngIf="edit && isNewEmployee" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+				<button *ngIf="edit && !isNewEmployee" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
 			</div>
 
 		</div>

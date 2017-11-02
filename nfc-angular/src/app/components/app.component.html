@@ -40,8 +40,8 @@
 					        <td>{{ employee.expedient }}</td>
 							<td>{{ employee.nfcTag }}</td>
 							<td>{{ employee.status }}</td>
-							<td class="text-right"><button type="button" (click)="modal.show(employee,false)" class="btn btn-primary">Ver</button></td>
-					        <td class="text-right"><button type="button" (click)="modal.show(employee,true)" class="btn btn-primary">Editar</button></td>
+							<td class="text-right"><button type="button" (click)="modal.show(false, employee)" class="btn btn-primary">Ver</button></td>
+					        <td class="text-right"><button type="button" (click)="modal.show(true, employee)" class="btn btn-primary">Editar</button></td>
 					        <td class="text-left"><button (click)="remove(i)" class="btn btn-danger">Eliminar</button></td>
 					    </tr>
 				    </tbody>
@@ -55,7 +55,7 @@
 				</table>
 				
 		</div>
-		<button type="button" (click)="modal.show(undefined,true)" class="btn btn-primary">Nuevo empleado</button>
+		<button type="button" (click)="modal.show(true)" class="btn btn-primary">Nuevo empleado</button>
 	</div>
 	<employee-modal [onFinish]="onFinish" #modal>
 	  <div class="app-modal-header">Empleado</div>

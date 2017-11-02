@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from "../shared/api.service";
+import { Employee } from "../shared/model/employee"
 import "../../style/app.scss";
 
 @Component({
@@ -8,22 +9,22 @@ import "../../style/app.scss";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  private data: any = [];
+  private data: Employee[] = [];
 
   constructor(private api: ApiService) {}
 
   ngOnInit() {
-    this.api.getEmployees().subscribe(data => {
+    this.api.getEmployees().subscribe((data: Employee[]) => {
       this.data = data;
     });
   }
 
-  onFinish = (employee: any) => {
+  onFinish = (employee: Employee) => {
     this.data.push(employee);
   };
 
-  remove(index: any) {
-    this.api.removeEmploye(this.data[index]).subscribe(data => {
+  remove(index: number) {
+    this.api.removeEmploye(this.data[index]).subscribe((data: Employee) => {
       this.data[index] = data;
     });
   }

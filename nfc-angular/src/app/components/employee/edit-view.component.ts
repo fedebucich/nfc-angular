@@ -1,48 +1,28 @@
-import { Component , Input} from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ApiService } from "../../shared/api.service";
+import { Employee } from "../../shared/model/employee";
 // import '../../style/app.scss';
 
 @Component({
   selector: "employee-modal",
   templateUrl: "./edit-view.component.html",
-	styleUrls: ["./edit-view.component.scss"],
-	
+  styleUrls: ["./edit-view.component.scss"]
 })
 export class EmployeeModalComponent {
-	@Input() onFinish: Function;
-	
-	public employee: any = {};
+  @Input() onFinish: Function;
+
+  public employee: Employee = this.emptyEmployee();
   public visible = false;
   private visibleAnimate = false;
-	private edit = true;
-	private newEmployee = false;
+  private edit = true;
+  private isNewEmployee = false;
+  private nfcTag: string;
 
   constructor(private api: ApiService) {}
 
-  public show(employee: any, edit: boolean): void {
-		console.log("employee ", employee)
-		if (!employee) {
-			this.api.getCode().subscribe(data => {
-				console.log("new")
-				this.newEmployee = true;
-				this.employee = {
-					_id: "",
-					name: "",
-					lastName: "",
-					expedient: "",
-					nfcTag: data[0].nfcTag,
-					status: "",
-					scheduleWorkTime: []
-				}
-			});			
-		} else {
-			this.newEmployee = false;
-			console.log("not new")
-			this.employee = employee;
-		}
-		this.edit = edit;
-		this.visible = true;
+  public show(edit: boolean, employee?: Employee): void {
     setTimeout(() => (this.visibleAnimate = true), 100);
+    this.init(edit, employee);
   }
 
   public hide(): void {
@@ -50,24 +30,57 @@ export class EmployeeModalComponent {
     setTimeout(() => (this.visible = false), 300);
   }
 
-  public save() {
-		if (this.newEmployee) {
-			this.api.createEmploye(this.employee).subscribe(data => {
-				console.log("id ", data._id);
-				this.onFinish(data);
-				console.log("EMPLOYEE updated: ", data);
-			});
-		} else {
-			this.api.updateEmploye(this.employee).subscribe(data => {
-				console.log("EMPLOYEE updated: ", data);
-			});
-		}
-    this.hide();
-  }
-
   public onContainerClicked(event: MouseEvent): void {
     if ((<HTMLElement>event.target).classList.contains("modal")) {
       this.hide();
     }
+  }
+
+  private init(edit: boolean, employee?: Employee) : void{
+    this.initNfcTag();
+    this.employee = this.initEmployee(employee);
+    this.edit = edit;
+    this.visible = true;
+    this.isNewEmployee = !employee;
+  }
+
+  private initNfcTag(): void {
+    this.api.getCode().subscribe(data => {
+      const nfcTag: string = data[0].nfcTag;
+      if (this.isNewEmployee) {
+        this.employee.nfcTag = nfcTag;
+      } else {
+        this.nfcTag = nfcTag;
+      }
+    });
+  }
+
+  public save(): void {
+    this.api.createEmploye(this.employee).subscribe(data => {
+      this.onFinish(data);
+      this.hide();
+    });
+  }
+
+  public update(): void {
+    this.api.updateEmploye(this.employee).subscribe(() => {
+      this.hide();
+    });
+  }
+
+  private initEmployee(employee: Employee): Employee {
+    return employee ? employee : this.emptyEmployee();
+  }
+
+  private emptyEmployee() {
+    return {
+      _id: "",
+      name: "",
+      lastName: "",
+      expedient: "",
+      nfcTag: "",
+      status: "",
+      scheduleWorkTime: []
+    };
   }
 }
