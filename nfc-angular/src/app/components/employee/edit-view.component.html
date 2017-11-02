@@ -19,8 +19,10 @@
 					<input type="text" class="form-control" id="nfcTag" [disabled]="!edit" [(ngModel)]="employee.nfcTag" name="nfcTag" #nfcTag="ngModel"
 					 placeholder="{{employee.nfcTag}}" value="{{employee.nfcTag}}">
 					<label for="status">Status</label>
-					<input type="text" class="form-control" id="status" [disabled]="!edit" [(ngModel)]="employee.status" name="status" #nfcTag="ngModel"
-					 placeholder="{{employee.status}}" value="{{employee.status}}">
+					<br>
+					<select [(ngModel)]="employee.status" [disabled]="!edit">
+						<option *ngFor="let s of allStatus" [ngValue]="s.status" >{{s.displayValue}}</option>
+					</select>
 				</div>
 			</div>
 

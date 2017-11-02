@@ -10,6 +10,8 @@ export interface Employee {
   lastName: string;
   expedient: string;
   nfcTag: string;
-  status: string;
+  status: Status;
   scheduleWorkTime: ScheduleWorkTime[];
 }
+
+export type Status = "active" | "inactive" | "suspended";

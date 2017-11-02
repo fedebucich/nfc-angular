@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from "../shared/api.service";
-import { Employee } from "../shared/model/employee"
+import { Employee, Status } from "../shared/model/employee"
+import { getDisplayValue, DisplayValue } from "../components/employee/d"
 import "../../style/app.scss";
 
 @Component({
@@ -28,4 +29,9 @@ export class AppComponent implements OnInit {
       this.data[index] = data;
     });
   }
+
+  getDisplayStatus(status: Status): DisplayValue {
+    return getDisplayValue(status);
+  }
+
 }

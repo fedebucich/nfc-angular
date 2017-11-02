@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { ApiService } from "../../shared/api.service";
-import { Employee } from "../../shared/model/employee";
+import { Employee, Status } from "../../shared/model/employee";
+import { StatusSelect } from "./d";
 // import '../../style/app.scss';
 
 @Component({
@@ -10,8 +11,8 @@ import { Employee } from "../../shared/model/employee";
 })
 export class EmployeeModalComponent {
   @Input() onFinish: Function;
-
-  public employee: Employee = this.emptyEmployee();
+  public employee: Employee = this.emptyEmployee();  
+  private allStatus: StatusSelect[] = this.initAllStatus();
   public visible = false;
   private visibleAnimate = false;
   private edit = true;
@@ -36,8 +37,9 @@ export class EmployeeModalComponent {
     }
   }
 
-  private init(edit: boolean, employee?: Employee) : void{
+  private init(edit: boolean, employee?: Employee): void {
     this.initNfcTag();
+    this.allStatus = this.initAllStatus();
     this.employee = this.initEmployee(employee);
     this.edit = edit;
     this.visible = true;
@@ -72,14 +74,23 @@ export class EmployeeModalComponent {
     return employee ? employee : this.emptyEmployee();
   }
 
+  private initAllStatus(): StatusSelect[] {
+    return [
+      { status: "active", displayValue: "Activo" },
+      { status: "inactive", displayValue: "Inactivo" },
+      { status: "suspended", displayValue: "Suspendido" }
+    ];
+  }
+
   private emptyEmployee() {
+    const status: Status = "active";
     return {
       _id: "",
       name: "",
       lastName: "",
       expedient: "",
       nfcTag: "",
-      status: "",
+      status: status,
       scheduleWorkTime: []
     };
   }

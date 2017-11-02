@@ -39,7 +39,7 @@
 					        <td>{{ employee.lastName }}</td>
 					        <td>{{ employee.expedient }}</td>
 							<td>{{ employee.nfcTag }}</td>
-							<td>{{ employee.status }}</td>
+							<td>{{ getDisplayStatus(employee.status) }}</td>
 							<td class="text-right"><button type="button" (click)="modal.show(false, employee)" class="btn btn-primary">Ver</button></td>
 					        <td class="text-right"><button type="button" (click)="modal.show(true, employee)" class="btn btn-primary">Editar</button></td>
 					        <td class="text-left"><button (click)="remove(i)" class="btn btn-danger">Eliminar</button></td>
