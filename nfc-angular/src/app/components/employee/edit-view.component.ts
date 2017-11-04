@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { ApiService } from "../../shared/api.service";
-import { Employee, Status } from "../../shared/model/employee";
-import { StatusSelect } from "./d";
+import { Employee, Status, ScheduleWorkTime } from "../../shared/model/employee";
+import { StatusSelect, DayLabel, getDayLabel } from "./d";
 // import '../../style/app.scss';
 
 @Component({
@@ -44,6 +44,7 @@ export class EmployeeModalComponent {
     this.edit = edit;
     this.visible = true;
     this.isNewEmployee = !employee;
+    // console.log();
   }
 
   private initNfcTag(): void {
@@ -82,7 +83,11 @@ export class EmployeeModalComponent {
     ];
   }
 
-  private emptyEmployee() {
+  public getDayDisplayLabel(workDay: ScheduleWorkTime): DayLabel {
+    return getDayLabel(workDay);
+  }
+
+  private emptyEmployee(): Employee {
     const status: Status = "active";
     return {
       _id: "",
@@ -91,7 +96,13 @@ export class EmployeeModalComponent {
       expedient: "",
       nfcTag: "",
       status: status,
-      scheduleWorkTime: []
+      scheduleWorkTime: [
+        { dayNumber: 1, timeFrom: 9,timeTo: 18 },
+        { dayNumber: 2, timeFrom: 9,timeTo: 18 },
+        { dayNumber: 3, timeFrom: 9,timeTo: 18 },
+        { dayNumber: 4, timeFrom: 9,timeTo: 18 },
+        { dayNumber: 5, timeFrom: 9,timeTo: 18 }
+      ]
     };
   }
 }

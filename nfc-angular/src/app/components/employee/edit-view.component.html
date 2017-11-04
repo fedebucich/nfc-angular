@@ -24,6 +24,9 @@
 						<option *ngFor="let s of allStatus" [ngValue]="s.status" >{{s.displayValue}}</option>
 					</select>
 				</div>
+				<div *ngFor="let workDay of employee.scheduleWorkTime">
+					{{getDayDisplayLabel(workDay)}}
+				</div>
 			</div>
 
 			<div class="app-modal-footer">
@@ -31,7 +34,6 @@
 				<button *ngIf="edit && isNewEmployee" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
 				<button *ngIf="edit && !isNewEmployee" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
 			</div>
-
 		</div>
 
 	</div>
