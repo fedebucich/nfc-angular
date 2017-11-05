@@ -6,41 +6,42 @@
 			</div>
 			<div class="modal-body">
 				<div class="app-modal-body">
-					<label for="name">Nombre</label>
+					<label for="name" style="margin-top:5px;">Nombre</label>
 					<input type="text" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
 					 placeholder="{{employee.name}}" value="{{employee.name}}">
-					<label for="lastName">Apellido</label>
+					<label for="lastName" style="margin-top:5px;">Apellido</label>
 					<input type="text" class="form-control" id="lastName" [disabled]="!edit" [(ngModel)]="employee.lastName" name="lastName"
 					 #lastName="ngModel" placeholder="{{employee.lastName}}" value="{{employee.lastName}}">
-					<label for="expedient">Expediente</label>
+					<label for="expedient" style="margin-top:5px;">Expediente</label>
 					<input type="text" class="form-control" id="expedient" [disabled]="!edit" [(ngModel)]="employee.expedient" name="expedient"
 					 #expedient="ngModel" placeholder="{{employee.expedient}}" value="{{employee.expedient}}">
-					<label for="nfcTag">Codigo SUBE</label>
+					<label for="nfcTag" style="margin-top:5px;">Codigo SUBE</label>
 					<input type="text" class="form-control" id="nfcTag" [disabled]="!edit" [(ngModel)]="employee.nfcTag" name="nfcTag" #nfcTag="ngModel"
 					 placeholder="{{employee.nfcTag}}" value="{{employee.nfcTag}}">
-					<label for="status">Status</label>
+					<label for="status" style="margin-top:5px;">Status</label>
 					<br>
 					<select [(ngModel)]="employee.status" [disabled]="!edit">
-						<option *ngFor="let s of allStatus" [ngValue]="s.status" >{{s.displayValue}}</option>
+						<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
 					</select>
 				</div>
-				<div *ngFor="let workDay of employee.scheduleWorkTime">
-					{{getDayDisplayLabel(workDay)}}
-					Desde <input type="time" id="exampleInput" name="input" [disabled]="!edit" 
-					(ngModelChange)="workDay.timeFrom=change($event)" [ngModel]="workDay.timeFrom  | date:'HH:mm:ss'"
-					placeholder="HH:mm:ss" />
-					Hasta <input type="time" id="exampleInput" name="input" [disabled]="!edit" 
-					(ngModelChange)="workDay.timeTo=change($event)" [ngModel]="workDay.timeTo | date:'HH:mm:ss'"
-					placeholder="HH:mm:ss" />
+				<div *ngFor="let workDay of employee.scheduleWorkTime" style="margin-top:10px;">
+					<div class="row">
+						<div class="col-sm-2">{{getDayDisplayLabel(workDay)}}</div>
+						<div class="col-sm-8">Desde
+							<input type="time" id="exampleInput" name="input" [disabled]="!edit" (ngModelChange)="workDay.timeFrom=change($event)" [ngModel]="workDay.timeFrom  | date:'HH:mm:ss'"
+							 placeholder="HH:mm:ss" style="margin-right:20px"/> 
+							 Hasta
+							<input type="time" id="exampleInput" name="input" [disabled]="!edit" (ngModelChange)="workDay.timeTo=change($event)" [ngModel]="workDay.timeTo | date:'HH:mm:ss'"
+							 placeholder="HH:mm:ss" />
+						</div>
+					</div>
 				</div>
+					<div class="app-modal-footer" style="margin-top:15px">
+						<button type="button" class="btn btn-default" (click)="hide()">Cerrar</button>
+						<button *ngIf="edit && isNewEmployee" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+						<button *ngIf="edit && !isNewEmployee" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
+					</div>
 			</div>
 
-			<div class="app-modal-footer">
-				<button type="button" class="btn btn-default" (click)="hide()">Cerrar</button>
-				<button *ngIf="edit && isNewEmployee" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
-				<button *ngIf="edit && !isNewEmployee" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
-			</div>
 		</div>
-
 	</div>
-</div>

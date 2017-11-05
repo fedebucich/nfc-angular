@@ -7,7 +7,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading text-center">LISTADO DE EMPLEADOS</div>
-				<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+				<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
 				    <thead>
 				    	<tr>
 			                <th>Busqueda por: </th>
@@ -47,9 +47,9 @@
 				    </tbody>
 				    <tfoot>
 					    <tr>
-					        <td colspan="6">
-					            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]">Cantidad de Elementos por Paginá</mfBootstrapPaginator>
-					        </td>
+					        <td colspan="8">
+					            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]">C</mfBootstrapPaginator>
+							</td>
 					    </tr>
 				    </tfoot>
 				</table>
