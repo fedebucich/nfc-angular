@@ -1,7 +1,7 @@
 export interface ScheduleWorkTime {
   dayNumber: number,
-  timeFrom: number,
-  timeTo: number
+  timeFrom: Date,
+  timeTo: Date
 }
 
 export interface Employee {

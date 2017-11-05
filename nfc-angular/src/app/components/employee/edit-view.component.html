@@ -26,6 +26,12 @@
 				</div>
 				<div *ngFor="let workDay of employee.scheduleWorkTime">
 					{{getDayDisplayLabel(workDay)}}
+					Desde <input type="time" id="exampleInput" name="input" [disabled]="!edit" 
+					(ngModelChange)="workDay.timeFrom=change($event)" [ngModel]="workDay.timeFrom  | date:'HH:mm:ss'"
+					placeholder="HH:mm:ss" />
+					Hasta <input type="time" id="exampleInput" name="input" [disabled]="!edit" 
+					(ngModelChange)="workDay.timeTo=change($event)" [ngModel]="workDay.timeTo | date:'HH:mm:ss'"
+					placeholder="HH:mm:ss" />
 				</div>
 			</div>
 

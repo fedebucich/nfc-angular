@@ -44,7 +44,6 @@ export class EmployeeModalComponent {
     this.edit = edit;
     this.visible = true;
     this.isNewEmployee = !employee;
-    // console.log();
   }
 
   private initNfcTag(): void {
@@ -87,6 +86,12 @@ export class EmployeeModalComponent {
     return getDayLabel(workDay);
   }
 
+  change(newValue){
+    const h = newValue.split(":")[0]; 
+    const m = newValue.split(":")[1]; 
+    return new Date(1970, 0, 1, h, m, 0);
+  }
+
   private emptyEmployee(): Employee {
     const status: Status = "active";
     return {
@@ -97,11 +102,11 @@ export class EmployeeModalComponent {
       nfcTag: "",
       status: status,
       scheduleWorkTime: [
-        { dayNumber: 1, timeFrom: 9,timeTo: 18 },
-        { dayNumber: 2, timeFrom: 9,timeTo: 18 },
-        { dayNumber: 3, timeFrom: 9,timeTo: 18 },
-        { dayNumber: 4, timeFrom: 9,timeTo: 18 },
-        { dayNumber: 5, timeFrom: 9,timeTo: 18 }
+        { dayNumber: 1, timeFrom: new Date(1970, 0, 1, 9, 0, 0),timeTo: new Date(1970, 0, 1, 18, 0, 0) },
+        { dayNumber: 2, timeFrom: new Date(1970, 0, 1, 9, 0, 0),timeTo: new Date(1970, 0, 1, 18, 0, 0) },
+        { dayNumber: 3, timeFrom: new Date(1970, 0, 1, 9, 0, 0),timeTo: new Date(1970, 0, 1, 18, 0, 0) },
+        { dayNumber: 4, timeFrom: new Date(1970, 0, 1, 9, 0, 0),timeTo: new Date(1970, 0, 1, 18, 0, 0) },
+        { dayNumber: 5, timeFrom: new Date(1970, 0, 1, 9, 0, 0),timeTo: new Date(1970, 0, 1, 18, 0, 0) },
       ]
     };
   }
