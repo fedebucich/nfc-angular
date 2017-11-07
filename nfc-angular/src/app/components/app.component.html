@@ -7,7 +7,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading text-center">LISTADO DE EMPLEADOS</div>
-				<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+				<table class="table table-striped" [mfData]="data | myFilter: filterArgs" #mf="mfDataTable" [mfRowsOnPage]="5">
 				    <thead>
 				    	<tr>
 			                <th>Busqueda por: </th>
@@ -34,7 +34,7 @@
 					   
 				    </thead>
 				    <tbody>
-					    <tr *ngFor="let employee of mf.data | myFilter: filterArgs; let i = index" [attr.data-index]="i">
+					    <tr *ngFor="let employee of mf.data let i = index" [attr.data-index]="i">
 					        <td>{{ employee.name }}</td>
 					        <td>{{ employee.lastName }}</td>
 					        <td>{{ employee.expedient }}</td>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from "../shared/api.service";
-import { Employee, Status } from "../shared/model/employee"
-import { getDisplayValue, DisplayValue } from "../components/employee/d"
+import { Employee, Status } from "../shared/model/employee";
+import { getDisplayValue, DisplayValue } from "../components/employee/d";
+import { FilterType } from "./filter";
 import "../../style/app.scss";
 
 @Component({
@@ -11,7 +12,7 @@ import "../../style/app.scss";
 })
 export class AppComponent implements OnInit {
   private data: Employee[] = [];
-  private filterArgs = { txt: "" }
+  private filterArgs: FilterType = { txt: "" };
 
   constructor(private api: ApiService) {}
 
@@ -35,5 +36,4 @@ export class AppComponent implements OnInit {
   getDisplayStatus(status: Status): DisplayValue {
     return getDisplayValue(status);
   }
-
 }
