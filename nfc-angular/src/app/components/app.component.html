@@ -11,7 +11,7 @@
 				    <thead>
 				    	<tr>
 			                <th>Busqueda por: </th>
-			                <th><input class="form-control" [(ngModel)]="filterQuery"/></th>
+			                <th><input class="form-control" [(ngModel)]="filterArgs.txt"/></th>
 			            </tr>
 					    <tr>
 					        <th style="width: 10%">
@@ -34,7 +34,7 @@
 					   
 				    </thead>
 				    <tbody>
-					    <tr *ngFor="let employee of mf.data let i = index" [attr.data-index]="i">
+					    <tr *ngFor="let employee of mf.data | myFilter: filterArgs; let i = index" [attr.data-index]="i">
 					        <td>{{ employee.name }}</td>
 					        <td>{{ employee.lastName }}</td>
 					        <td>{{ employee.expedient }}</td>

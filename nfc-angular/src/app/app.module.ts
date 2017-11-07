@@ -9,6 +9,7 @@ import { ApiComponent } from './Api Service/Api.component';
 import { AboutComponent } from './about/about.component';
 import { EmployeeModalComponent } from './components/employee/edit-view.component';
 import { ApiService } from './shared';
+import { MyFilterPipe } from '../app/components/filter';
 import { routing } from './app.routing';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -25,7 +26,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     AppComponent,
     ApiComponent,
     AboutComponent,
-    EmployeeModalComponent
+    EmployeeModalComponent,
+    MyFilterPipe
   ],
   providers: [
     ApiService

@@ -11,10 +11,12 @@ import "../../style/app.scss";
 })
 export class AppComponent implements OnInit {
   private data: Employee[] = [];
+  private filterArgs = { txt: "" }
 
   constructor(private api: ApiService) {}
 
   ngOnInit() {
+    console.log(this.filterArgs);
     this.api.getEmployees().subscribe((data: Employee[]) => {
       this.data = data;
     });
