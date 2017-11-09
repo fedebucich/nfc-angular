@@ -9,9 +9,15 @@
             <div class="panel-heading text-center">LISTADO DE EMPLEADOS</div>
 				<table class="table table-striped" [mfData]="data | myFilter: filterArgs" #mf="mfDataTable" [mfRowsOnPage]="5">
 				    <thead>
-				    	<tr>
-			                <th>Busqueda por: </th>
-			                <th><input class="form-control" [(ngModel)]="filterArgs.txt"/></th>
+				    	<tr> 
+			                <th colspan="1">Busqueda por: </th>
+							<th colspan="1"><input class="form-control" [(ngModel)]="filterArgs.txt"/></th>
+							<th colspan="1">Mostrar estado: </th>
+			                <th colspan="2">
+								<select [(ngModel)]="displayStatus" (change)="onChange()">
+									<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
+								</select>
+							</th>
 			            </tr>
 					    <tr>
 					        <th style="width: 10%">

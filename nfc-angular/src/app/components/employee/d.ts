@@ -1,6 +1,6 @@
 import { Status, ScheduleWorkTime } from "../../shared/model/employee";
 
-export type DisplayValue = "Activo" | "Inactivo" | "Suspendido";
+export type DisplayValue = "Activo" | "Inactivo" | "Suspendido" | "Todos";
 export type DayLabel = "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes";
 
 export type StatusSelect = {

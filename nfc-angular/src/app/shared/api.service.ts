@@ -16,6 +16,13 @@ export class ApiService {
     });
   };
 
+  getEmployeesByStatus = (status: string): Observable<Employee[]> => {
+    return this.http.get(API_ROOT + "employee" + "/byStatus/" + status).map(data => {
+      console.log("GET ALL EMPLOYEE RESULT: ", data.json());
+      return data.json();
+    });
+  };
+
   updateEmploye = (employee: Employee): Observable<Employee> => {
     return this.http
       .put(API_ROOT + "employee/" + employee._id, employee)
