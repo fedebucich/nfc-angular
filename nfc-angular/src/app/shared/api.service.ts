@@ -49,11 +49,4 @@ export class ApiService {
         return data.json();
       });
   };
-
-  getCode = () => {
-    return this.http.get(API_ROOT + "/code").map(data => {
-      console.log("GET Code RESULT: ", data.json());
-      return data.json();
-    });
-  };
 }

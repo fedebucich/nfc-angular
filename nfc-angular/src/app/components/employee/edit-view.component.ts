@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { ApiService } from "../../shared/api.service";
 import { Employee, Status, ScheduleWorkTime } from "../../shared/model/employee";
 import { StatusSelect, DayLabel, getDayLabel } from "./d";
+import * as io from 'socket.io-client';
 // import '../../style/app.scss';
 
 @Component({
@@ -17,13 +18,15 @@ export class EmployeeModalComponent {
   private visibleAnimate = false;
   private edit = true;
   private isNewEmployee = false;
-  private nfcTag: string;
+  private url = 'http://localhost:3000';  
+  private socket;
 
   constructor(private api: ApiService) {}
 
   public show(edit: boolean, employee?: Employee): void {
     setTimeout(() => (this.visibleAnimate = true), 100);
     this.init(edit, employee);
+    this.initSocket();
   }
 
   public hide(): void {
@@ -38,7 +41,6 @@ export class EmployeeModalComponent {
   }
 
   private init(edit: boolean, employee?: Employee): void {
-    this.initNfcTag();
     this.allStatus = this.initAllStatus();
     this.employee = this.initEmployee(employee);
     this.edit = edit;
@@ -46,13 +48,11 @@ export class EmployeeModalComponent {
     this.isNewEmployee = !employee;
   }
 
-  private initNfcTag(): void {
-    this.api.getCode().subscribe(data => {
-      const nfcTag: string = data[0].nfcTag;
-      if (this.isNewEmployee) {
-        this.employee.nfcTag = nfcTag;
-      } else {
-        this.nfcTag = nfcTag;
+  private initSocket() {
+    this.socket = io(this.url);
+    this.socket.on('nfc-tag', (data) => {
+      if(this.edit) {
+        this.employee.nfcTag = data.text;
       }
     });
   }
