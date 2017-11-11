@@ -32,6 +32,7 @@ export class EmployeeModalComponent {
   public hide(): void {
     this.visibleAnimate = false;
     setTimeout(() => (this.visible = false), 300);
+    this.closeSocket();
   }
 
   public onContainerClicked(event: MouseEvent): void {
@@ -55,6 +56,10 @@ export class EmployeeModalComponent {
         this.employee.nfcTag = data.text;
       }
     });
+  }
+
+  private closeSocket(){
+    this.socket.disconnect();
   }
 
   public save(): void {
