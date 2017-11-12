@@ -12,7 +12,8 @@ import * as io from 'socket.io-client';
 })
 export class EmployeeModalComponent {
   @Input() onFinish: Function;
-  public employee: Employee = this.emptyEmployee();  
+  public employee: Employee = this.emptyEmployee();
+  public receivedEmployee: Employee; 
   private allStatus: StatusSelect[] = this.initAllStatus();
   public visible = false;
   private visibleAnimate = false;
@@ -26,7 +27,7 @@ export class EmployeeModalComponent {
   constructor(private api: ApiService) {}
 
   public show(edit: boolean, employee?: Employee): void {
-    console.log(this.error, this.allStatus, this.isNewEmployee);
+    console.log(this.error, this.allStatus, this.isNewEmployee); 
     setTimeout(() => (this.visibleAnimate = true), 100);
     this.init(edit, employee);
     this.initSocket();
@@ -44,11 +45,13 @@ export class EmployeeModalComponent {
     }
   }
 
-  private init(edit: boolean, employee?: Employee): void {
+  private init(edit: boolean, employee?: Employee): void {    
     this.allStatus = this.initAllStatus();
+    this.receivedEmployee = employee;
     this.employee = this.initEmployee(employee);
     this.edit = edit;
     this.visible = true;
+    this.error = undefined;
     this.isNewEmployee = !employee;
   }
 
@@ -75,7 +78,13 @@ export class EmployeeModalComponent {
   }
 
   public update(): void {
-    this.api.updateEmploye(this.employee).subscribe(() => {
+    this.api.updateEmploye(this.employee).subscribe((data) => {
+      this.receivedEmployee.name = data.name;
+      this.receivedEmployee.lastName = data.lastName;
+      this.receivedEmployee.expedient = data.expedient;
+      this.receivedEmployee.nfcTag = data.nfcTag;
+      this.receivedEmployee.status = data.status;
+      this.receivedEmployee.scheduleWorkTime = data.scheduleWorkTime;
       this.hide();
     }, err => {
       this.error = err._body;
@@ -83,7 +92,7 @@ export class EmployeeModalComponent {
   }
 
   private initEmployee(employee: Employee): Employee {
-    return employee ? employee : this.emptyEmployee();
+    return employee ? Object.assign({}, employee) : this.emptyEmployee();
   }
 
   private initAllStatus(): StatusSelect[] {

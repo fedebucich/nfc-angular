@@ -10,22 +10,24 @@
 					<div *ngIf="error" class="alert alert-danger"> {{ error }} </div>
 
 					<label for="name" style="margin-top:5px;">Nombre</label>
-					<input type="text" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
+					<input type="text" [maxlength]="30" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
 					 placeholder="{{employee.name}}" value="{{employee.name}}">
 					<label for="lastName" style="margin-top:5px;">Apellido</label>
-					<input type="text" class="form-control" id="lastName" [disabled]="!edit" [(ngModel)]="employee.lastName" name="lastName"
+					<input type="text" [maxlength]="30" class="form-control" id="lastName" [disabled]="!edit" [(ngModel)]="employee.lastName" name="lastName"
 					 #lastName="ngModel" placeholder="{{employee.lastName}}" value="{{employee.lastName}}">
 					<label for="expedient" style="margin-top:5px;">Expediente</label>
-					<input type="text" class="form-control" id="expedient" [disabled]="!edit" [(ngModel)]="employee.expedient" name="expedient"
+					<input type="text" [maxlength]="30" class="form-control" id="expedient" [disabled]="!edit" [(ngModel)]="employee.expedient" name="expedient"
 					 #expedient="ngModel" placeholder="{{employee.expedient}}" value="{{employee.expedient}}">
 					<label for="nfcTag" style="margin-top:5px;">Codigo SUBE</label>
 					<input type="text" class="form-control" id="nfcTag" disabled [(ngModel)]="employee.nfcTag" name="nfcTag" #nfcTag="ngModel"
 					 placeholder="{{employee.nfcTag}}" value="{{employee.nfcTag}}">
 					<label for="status" style="margin-top:5px;">Status</label>
 					<br>
+
 					<select [(ngModel)]="employee.status" [disabled]="!edit">
 						<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
 					</select>
+					
 				</div>
 				<div *ngFor="let workDay of employee.scheduleWorkTime" style="margin-top:10px;">
 					<div class="row">

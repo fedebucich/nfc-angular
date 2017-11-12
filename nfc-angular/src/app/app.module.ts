@@ -8,6 +8,7 @@ import { AppComponent } from './components/app.component';
 import { ApiComponent } from './Api Service/Api.component';
 import { AboutComponent } from './about/about.component';
 import { EmployeeModalComponent } from './components/employee/edit-view.component';
+import { ConfirmationComponent } from './components/employee/confirmation-dialog/confirmation.component';
 import { ApiService } from './shared';
 import { MyFilterPipe } from '../app/components/filter';
 import { routing } from './app.routing';
@@ -27,6 +28,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     ApiComponent,
     AboutComponent,
     EmployeeModalComponent,
+    ConfirmationComponent,
     MyFilterPipe
   ],
   providers: [

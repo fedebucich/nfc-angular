@@ -40,9 +40,9 @@ export class AppComponent implements OnInit {
     this.data.push(employee);
   };
 
-  remove(index: number) {
-    this.api.removeEmploye(this.data[index]).subscribe((data: Employee) => {
-      this.data[index] = data;
+  remove = (index: number) => {
+    this.api.removeEmploye(this.data[index]).subscribe(() => {
+      this.data.splice(index, 1);
     });
   }
 

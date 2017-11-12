@@ -48,7 +48,7 @@
 							<td>{{ getDisplayStatus(employee.status) }}</td>
 							<td class="text-right"><button type="button" (click)="modal.show(false, employee)" class="btn btn-primary">Ver</button></td>
 					        <td class="text-right"><button type="button" (click)="modal.show(true, employee)" class="btn btn-primary">Editar</button></td>
-					        <td class="text-left"><button (click)="remove(i)" class="btn btn-danger">Eliminar</button></td>
+					        <td class="text-left"><button (click)="modalConfirmation.show('Esta seguro que quiere eliminar este empleado?', i)" class="btn btn-danger">Eliminar</button></td>
 					    </tr>
 				    </tbody>
 				    <tfoot>
@@ -66,5 +66,8 @@
 	<employee-modal [onFinish]="onFinish" #modal>
 	  <div class="app-modal-header">Empleado</div>
 	</employee-modal>
+	<confimation-modal [onAgreed]="remove" #modalConfirmation>
+		<div class="app-modal-header">Confirmacion</div>
+	</confimation-modal>
 </div>
 
