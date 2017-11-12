@@ -35,6 +35,7 @@ export class EmployeeModalComponent {
 
   public hide(): void {
     this.visibleAnimate = false;
+    this.employee = this.emptyEmployee();
     setTimeout(() => (this.visible = false), 300);
     this.closeSocket();
   }
