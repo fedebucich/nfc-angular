@@ -20,10 +20,13 @@ export class EmployeeModalComponent {
   private isNewEmployee = false;
   private url = 'http://localhost:3000';  
   private socket;
+  private error;
+  
 
   constructor(private api: ApiService) {}
 
   public show(edit: boolean, employee?: Employee): void {
+    console.log(this.error, this.allStatus, this.isNewEmployee);
     setTimeout(() => (this.visibleAnimate = true), 100);
     this.init(edit, employee);
     this.initSocket();
@@ -66,12 +69,16 @@ export class EmployeeModalComponent {
     this.api.createEmploye(this.employee).subscribe(data => {
       this.onFinish(data);
       this.hide();
+    }, err => {
+      this.error = err._body;
     });
   }
 
   public update(): void {
     this.api.updateEmploye(this.employee).subscribe(() => {
       this.hide();
+    }, err => {
+      this.error = err._body;
     });
   }
 

@@ -6,6 +6,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="app-modal-body">
+
+					<div *ngIf="error" class="alert alert-danger"> {{ error }} </div>
+
 					<label for="name" style="margin-top:5px;">Nombre</label>
 					<input type="text" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
 					 placeholder="{{employee.name}}" value="{{employee.name}}">
