@@ -14,4 +14,4 @@ export interface Employee {
   scheduleWorkTime: ScheduleWorkTime[];
 }
 
-export type Status = "active" | "inactive" | "suspended" | "Todos";
+export type Status = "active" | "inactive" | "suspended" | "Todos" | "";
