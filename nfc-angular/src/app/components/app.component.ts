@@ -7,11 +7,11 @@ import { StatusSelect } from "../components/employee/d";
 import "../../style/app.scss";
 
 @Component({
-  selector: "my-app",
+  selector: 'my-employess',
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent implements OnInit {
+export class EmployeesComponent implements OnInit {
   private data: Employee[] = [];
   private filterArgs: FilterType = { txt: "" };
   private allStatus: StatusSelect[] = this.initAllStatus();
