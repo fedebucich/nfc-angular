@@ -1,0 +1,50 @@
+<div class="page-title">
+	<div class="title_left">
+		<h3>Tag Sube Rechazadas</h3>
+	</div>
+</div>
+<div *ngIf="error" class="alert alert-danger"> {{ error }} </div>
+<div class="clearfix"></div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+    	<div class="x_panel">
+				<table class="table table-hover" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+						<thead>
+							<tr>
+								<th style="width: 10%" class="text-center">
+									<mfDefaultSorter by="nfcTag">Tag Sube</mfDefaultSorter>
+								</th>
+								<th style="width: 10%" class="text-center">
+									<mfDefaultSorter by="date">Fecha/Hora Rechazo</mfDefaultSorter>
+								</th>
+								<th style="width: 20%" class="text-center">
+									<mfDefaultSorter by="description">Descripcion</mfDefaultSorter>
+								</th>
+								<th style="width: 15%" class="text-center">
+									<mfDefaultSorter by="employeeFullName">Nombre/Apellido Empleado</mfDefaultSorter>
+								</th>
+								<th style="width: 10%" class="text-center">
+									<mfDefaultSorter by="employeeExpedient">Legajo Empleado</mfDefaultSorter>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let reportData of mf.data">
+								<td class="text-center">{{ reportData.nfcTag }}</td>
+								<td class="text-center">{{ reportData.date }}</td>
+								<td class="text-center">{{ reportData.description }}</td>
+								<td class="text-center">{{ reportData.employeeFullName }}</td>
+								<td class="text-center">{{ reportData.employeeExpedient }}</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="8">
+									<mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]">C</mfBootstrapPaginator>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+		</div>
+	</div>
+</div>

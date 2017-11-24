@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { Employee } from "./model/employee"
 import { Observable } from "rxjs"
+import { ReportData } from "./model/reportData"
 import "rxjs/add/operator/map";
 const API_ROOT = "http://localhost:3000/api/";
 
@@ -48,5 +49,19 @@ export class ApiService {
         console.log("Delete EMPLOYEE RESULT: ", data.json());
         return data.json();
       });
+  };
+
+  getInfoAllRejectedSubeTag = (): Observable<ReportData[]> => {
+    return this.http.get(API_ROOT + "reports/byRejectedSubeTag").map(data => {
+      console.log("GET ALL REJECTED SUBE TAG REPORT DATA: ", data.json());
+      return data.json();
+    });
+  };
+
+  getInfoAllEmployeeEnterToday = (): Observable<ReportData[]> => {
+    return this.http.get(API_ROOT + "reports/byEmployeeEnterToday").map(data => {
+      console.log("GET ALL EMPLOYEES ENTER TODAY REPORT DATA: ", data.json());
+      return data.json();
+    });
   };
 }

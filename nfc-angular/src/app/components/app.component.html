@@ -1,22 +1,25 @@
-<div class="container">
-    <div class="col-xs-12">
-
-        <div class="page-header">
-            <h1></h1>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">LISTADO DE EMPLEADOS</div>
-				<table class="table table-striped" [mfData]="data | myFilter: filterArgs" #mf="mfDataTable" [mfRowsOnPage]="5">
+<div class="page-title">
+	<div class="title_left">
+		<h3>Listado de Empleados</h3>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+    	<div class="x_panel">
+				<table class="table table-hover" [mfData]="data | myFilter: filterArgs" #mf="mfDataTable" [mfRowsOnPage]="5">
 				    <thead>
 				    	<tr> 
-			                <th colspan="1">Busqueda por: </th>
+			                <th colspan="1"><label class="control-label">Busqueda por: </label></th>
 							<th colspan="1"><input class="form-control" [(ngModel)]="filterArgs.txt"/></th>
-							<th colspan="1">Mostrar estado: </th>
-			                <th colspan="2">
-								<select [(ngModel)]="displayStatus" (change)="onChange()">
+							<th colspan="1"><label class="control-label">Mostrar estado: </label></th>
+			                <th colspan="1">
+								<select [(ngModel)]="displayStatus" (change)="onChange()" class="select2_single form-control">
 									<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
 								</select>
+							</th>
+							<th colspan="4" class="text-right">
+								<button type="button" (click)="modal.show(true)" class="btn btn-primary">Nuevo empleado</button>
 							</th>
 			            </tr>
 					    <tr>
@@ -59,15 +62,12 @@
 					    </tr>
 				    </tfoot>
 				</table>
-				
-		</div>
-		<button type="button" (click)="modal.show(true)" class="btn btn-primary">Nuevo empleado</button>
+		</div>	  
+		<employee-modal [onFinish]="onFinish" #modal>
+	  		<div class="app-modal-header">Creacion/Edicion Empleado</div>
+		</employee-modal>		
+		<confimation-modal [onAgreed]="onRemove" #modalConfirmation>
+			<div class="app-modal-header">Eliminar Empleado (cambio de estado a inactivo)</div>
+		</confimation-modal>
 	</div>
-	<employee-modal [onFinish]="onFinish" #modal>
-	  <div class="app-modal-header">Empleado</div>
-	</employee-modal>
-	<confimation-modal [onAgreed]="remove" #modalConfirmation>
-		<div class="app-modal-header">Confirmacion</div>
-	</confimation-modal>
 </div>
-
