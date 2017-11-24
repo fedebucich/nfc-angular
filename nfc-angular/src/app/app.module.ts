@@ -8,8 +8,6 @@ import { EmployeesComponent } from './components/app.component';
 import { LogoComponent } from './index/logo.component';
 import { ReportsDetailAccessRejectedComponent } from './reports/reports.access.rejected.component';
 import { ReportsDetailAccessEnterTodayComponent } from './reports/reports.access.enter.today.component';
-import { ApiComponent } from './Api Service/Api.component';
-import { AboutComponent } from './about/about.component';
 import { EmployeeModalComponent } from './components/employee/edit-view.component';
 import { ConfirmationComponent } from './components/employee/confirmation-dialog/confirmation.component';
 import { ApiService } from './shared';
@@ -29,8 +27,6 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   ],
   declarations: [
     EmployeesComponent,
-    ApiComponent,
-    AboutComponent,
     EmployeeModalComponent,
     ConfirmationComponent,
     MyFilterPipe,
