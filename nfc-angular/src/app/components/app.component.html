@@ -1,0 +1,73 @@
+<div class="page-title">
+	<div class="title_left">
+		<h3>Listado de Empleados</h3>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+    	<div class="x_panel">
+				<table class="table table-hover" [mfData]="data | myFilter: filterArgs" #mf="mfDataTable" [mfRowsOnPage]="5">
+				    <thead>
+				    	<tr> 
+			                <th colspan="1"><label class="control-label">Busqueda por: </label></th>
+							<th colspan="1"><input class="form-control" [(ngModel)]="filterArgs.txt"/></th>
+							<th colspan="1"><label class="control-label">Mostrar estado: </label></th>
+			                <th colspan="1">
+								<select [(ngModel)]="displayStatus" (change)="onChange()" class="select2_single form-control">
+									<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
+								</select>
+							</th>
+							<th colspan="4" class="text-right">
+								<button type="button" (click)="modal.show(true)" class="btn btn-primary">Nuevo empleado</button>
+							</th>
+			            </tr>
+					    <tr>
+					        <th style="width: 10%">
+					            <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+					        </th>
+					        <th style="width: 10%">
+					            <mfDefaultSorter by="lastName">Apellido	</mfDefaultSorter>
+					        </th>
+					        <th style="width: 10%">
+					            <mfDefaultSorter by="expedient">Legajo</mfDefaultSorter>
+					        </th>
+					         <th style="width: 10%">
+					            <mfDefaultSorter by="nfcTag">Tag Sube</mfDefaultSorter>
+							</th>
+							<th style="width: 10%">
+									<mfDefaultSorter by="nfcTag">Status</mfDefaultSorter>
+								</th>
+					         <th class="text-center" style="width: 10%" colspan="3">Opciones</th>
+					    </tr>
+					   
+				    </thead>
+				    <tbody>
+					    <tr *ngFor="let employee of mf.data let i = index" [attr.data-index]="i">
+					        <td>{{ employee.name }}</td>
+					        <td>{{ employee.lastName }}</td>
+					        <td>{{ employee.expedient }}</td>
+							<td>{{ employee.nfcTag }}</td>
+							<td>{{ getDisplayStatus(employee.status) }}</td>
+							<td class="text-right"><button type="button" (click)="modal.show(false, employee)" class="btn btn-primary">Ver</button></td>
+					        <td class="text-right"><button type="button" (click)="modal.show(true, employee)" class="btn btn-primary">Editar</button></td>
+					        <td class="text-left"><button (click)="modalConfirmation.show('Esta seguro que quiere eliminar este empleado?', i)" class="btn btn-danger">Eliminar</button></td>
+					    </tr>
+				    </tbody>
+				    <tfoot>
+					    <tr>
+					        <td colspan="8">
+					            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]">C</mfBootstrapPaginator>
+							</td>
+					    </tr>
+				    </tfoot>
+				</table>
+		</div>	  
+		<employee-modal [onFinish]="onFinish" #modal>
+	  		<div class="app-modal-header">Creacion/Edicion Empleado</div>
+		</employee-modal>		
+		<confimation-modal [onAgreed]="onRemove" #modalConfirmation>
+			<div class="app-modal-header">Eliminar Empleado (cambio de estado a inactivo)</div>
+		</confimation-modal>
+	</div>
+</div>

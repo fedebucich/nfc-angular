@@ -1,0 +1,33 @@
+<div class="container body">
+  		<div class="main_container">
+			<div class="col-md-3 left_col">
+		  		<div class="left_col scroll-view">
+		  			<div class="navbar nav_title" style="border: 0;">
+		  				<a [routerLink]="['/']" class="site_title"><i class="glyphicon glyphicon-home"></i> Acciona IT </a>
+		  			</div>
+		  			<div class="clearfix"></div>
+		  			<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+		  				<div class="menu_section active">
+		  					<ul class="nav side-menu">
+		  						<li><a [routerLink]="['/employees']"><i class="glyphicon glyphicon-user"></i> Empleados </a></li>
+						        <li><a><i class="glyphicon glyphicon-list-alt"></i> Reportes <span class="glyphicon glyphicon-chevron-down"></span></a>
+						    		<ul class="nav child_menu" style="display: block;">
+						        		<li><a [routerLink]="['/reports/byRejectedSubeTag']">Tag Sube Rechazadas</a></li>
+						            	<li><a [routerLink]="['/reports/byEmployeeEnterToday']">Empleados que entraron en el dia.</a></li>
+						        	</ul>
+						        </li>
+		  					</ul>
+		  				</div>
+		  			</div>
+		  		</div>
+		  	</div>
+			<div class="top_nav">
+		    	<div class="nav_menu"></div>
+		    </div>
+		  	<div class="right_col" style="min-height: 3790px;">
+		  		<div class=""> 
+		        	<router-outlet></router-outlet>
+		        </div>
+		  	</div>
+		</div>
+    </div>
