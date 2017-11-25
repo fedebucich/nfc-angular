@@ -31,7 +31,7 @@
 						<tbody>
 							<tr *ngFor="let reportData of mf.data">
 								<td class="text-center">{{ reportData.nfcTag }}</td>
-								<td class="text-center">{{ reportData.date }}</td>
+								<td class="text-center">{{ reportData.date | date:'dd/mm/yyyy HH:mm:ss' }}</td>
 								<td class="text-center">{{ reportData.description }}</td>
 								<td class="text-center">{{ reportData.employeeFullName }}</td>
 								<td class="text-center">{{ reportData.employeeExpedient }}</td>
