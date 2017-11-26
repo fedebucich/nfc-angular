@@ -40,7 +40,7 @@ export class EmployeesComponent implements OnInit {
     this.data.push(employee);
   };
 
-  remove = (index: number) => {
+  onRemove = (index: number) => {
     this.api.removeEmploye(this.data[index]).subscribe(() => {
       this.data.splice(index, 1);
     });

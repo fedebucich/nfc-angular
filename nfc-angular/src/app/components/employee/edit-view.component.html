@@ -4,48 +4,88 @@
 			<div class="modal-header">
 				<ng-content select=".app-modal-header"></ng-content>
 			</div>
-			<div class="modal-body">
-				<div class="app-modal-body">
-
-					<div *ngIf="error" class="alert alert-danger"> {{ error }} </div>
-
-					<label for="name" style="margin-top:5px;">Nombre</label>
-					<input type="text" [maxlength]="30" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
-					 placeholder="{{employee.name}}" value="{{employee.name}}">
-					<label for="lastName" style="margin-top:5px;">Apellido</label>
-					<input type="text" [maxlength]="30" class="form-control" id="lastName" [disabled]="!edit" [(ngModel)]="employee.lastName" name="lastName"
-					 #lastName="ngModel" placeholder="{{employee.lastName}}" value="{{employee.lastName}}">
-					<label for="expedient" style="margin-top:5px;">Expediente</label>
-					<input type="text" [maxlength]="30" class="form-control" id="expedient" [disabled]="!edit" [(ngModel)]="employee.expedient" name="expedient"
-					 #expedient="ngModel" placeholder="{{employee.expedient}}" value="{{employee.expedient}}">
-					<label for="nfcTag" style="margin-top:5px;">Codigo SUBE</label>
-					<input type="text" class="form-control" id="nfcTag" disabled [(ngModel)]="employee.nfcTag" name="nfcTag" #nfcTag="ngModel"
-					 placeholder="{{employee.nfcTag}}" value="{{employee.nfcTag}}">
-					<label for="status" style="margin-top:5px;">Status</label>
-					<br>
-
-					<select [(ngModel)]="employee.status" [disabled]="!edit">
-						<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
-					</select>
-					
-				</div>
-				<div *ngFor="let workDay of employee.scheduleWorkTime" style="margin-top:10px;">
-					<div class="row">
-						<div class="col-sm-2">{{getDayDisplayLabel(workDay)}}</div>
-						<div class="col-sm-8">Desde
-							<input type="time" id="exampleInput" name="input" [disabled]="!edit" (ngModelChange)="workDay.timeFrom=change($event)" [ngModel]="workDay.timeFrom  | date:'HH:mm:ss'"
-							 placeholder="HH:mm:ss" style="margin-right:20px" /> Hasta
-							<input type="time" id="exampleInput" name="input" [disabled]="!edit" (ngModelChange)="workDay.timeTo=change($event)" [ngModel]="workDay.timeTo | date:'HH:mm:ss'"
-							 placeholder="HH:mm:ss" />
+			<div *ngIf="error" class="alert alert-danger"> {{ error }} </div>
+			<form #formEmployee="ngForm" novalidate>
+				<div class="modal-body">
+					<div class="app-modal-body">
+						<label for="name" style="margin-top:5px;">Nombre</label>
+						<input type="text" class="form-control" id="name" [disabled]="!edit" [(ngModel)]="employee.name" name="name" #name="ngModel"
+						 placeholder="{{employee.name}}" value="{{employee.name}}"  required minlength="4" maxlength="30" pattern="[a-zA-Z '-]+">
+						 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+							  <div *ngIf="name.errors.required">
+							    Nombre requerido.
+							  </div>
+							  <div *ngIf="name.errors.minlength">
+							    El nombre debe contener por lo menos 4 caracteres.
+							  </div>
+							  <div *ngIf="name.errors.pattern">
+							    El nombre debe contener solo letras.
+							  </div>
+						</div>
+						<label for="lastName" style="margin-top:5px;">Apellido</label>
+						<input type="text" class="form-control" id="lastName" [disabled]="!edit" [(ngModel)]="employee.lastName" name="lastName"
+						 #lastName="ngModel" placeholder="{{employee.lastName}}" value="{{employee.lastName}}" required maxlength="30" minlength="4" pattern="[a-zA-Z '-]+">
+						<div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+							  <div *ngIf="lastName.errors.required">
+							    Apellido requerido.
+							  </div>
+							  <div *ngIf="lastName.errors.minlength">
+							    El apellido debe contener por lo menos 4 caracteres.
+							  </div>
+							  <div *ngIf="lastName.errors.pattern">
+							    El apellido debe contener solo letras.
+							  </div>
+						</div>
+						<label for="expedient" style="margin-top:5px;">Expediente</label>
+						<input type="text" class="form-control" id="expedient" [disabled]="!edit" [(ngModel)]="employee.expedient" name="expedient"
+						 #expedient="ngModel" placeholder="{{employee.expedient}}" value="{{employee.expedient}}" maxlength="30" required pattern="[a-zA-Z0-9 ]+">
+						<div *ngIf="expedient.invalid && (expedient.dirty || expedient.touched)" class="alert alert-danger">
+							  <div *ngIf="expedient.errors.required">
+							    Expediente requerido.
+							  </div>
+							  <div *ngIf="expedient.errors.pattern">
+							    El expediente debe contener solo letras y numeros y no caracters invalidos.
+							  </div>
+						</div>
+						<label for="nfcTag" style="margin-top:5px;">Codigo SUBE</label>
+						<input type="text" class="form-control" id="nfcTag" disabled [(ngModel)]="employee.nfcTag" name="nfcTag" #nfcTag="ngModel"
+						 placeholder="{{employee.nfcTag}}" value="{{employee.nfcTag}}" required pattern="[a-zA-Z0-9 ]+">
+						 <div *ngIf="nfcTag.invalid && (nfcTag.dirty || nfcTag.touched)" class="alert alert-danger">
+							  <div *ngIf="nfcTag.errors.required">
+							    Codigo Sube requerido.
+							  </div>
+							  <div *ngIf="nfcTag.errors.pattern">
+							    El Codigo Sube debe contener solo letras y numeros y no caracters invalidos.
+							  </div>
+						</div>
+						<label for="status" style="margin-top:5px;">Status</label>
+						<br>
+						<select [(ngModel)]="employee.status" class="form-control" [disabled]="!edit" name="status" #status="ngModel" required>
+							<option value="">Seleccionar</option> 								
+							<option *ngFor="let s of allStatus" [ngValue]="s.status">{{s.displayValue}}</option>
+						</select>
+						<div *ngIf="status.invalid && (status.dirty || status.touched)" class="alert alert-danger">
+							  Estado requerido.
 						</div>
 					</div>
+					<div *ngFor="let workDay of employee.scheduleWorkTime let i = index" [attr.data-index]="i" style="margin-top:10px;">
+						<div class="row">
+							<div class="col-sm-2">{{getDayDisplayLabel(workDay)}}</div>
+							<div class="col-sm-8">Desde
+								<input type="time" id="exampleInputFrom_{{i}}" name="inputFrom_{{i}}" [disabled]="!edit" (ngModelChange)="workDay.timeFrom=change($event)" [ngModel]="workDay.timeFrom | date:'HH:mm:ss'"
+								 placeholder="HH:mm:ss" style="margin-right:20px"/> 
+								 Hasta
+								<input type="time" id="exampleInputTo_{{i}}" name="inputTo_{{i}}" [disabled]="!edit" (ngModelChange)="workDay.timeTo=change($event)" [ngModel]="workDay.timeTo | date:'HH:mm:ss'"
+								 placeholder="HH:mm:ss" />
+							</div>
+						</div>
+					</div>
+						<div class="app-modal-footer" style="margin-top:15px">
+							<button type="button" class="btn btn-default" (click)="hide()">Cerrar</button>
+							<button [disabled]="!formEmployee.valid" *ngIf="edit && isNewEmployee" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+							<button [disabled]="!formEmployee.valid" *ngIf="edit && !isNewEmployee" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
+						</div>
 				</div>
-				<div class="app-modal-footer" style="margin-top:15px">
-					<button type="button" class="btn btn-default" (click)="hide()">Cerrar</button>
-					<button *ngIf="edit && isNewEmployee" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
-					<button *ngIf="edit && !isNewEmployee" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
-				</div>
-			</div>
-
+			</form>
 		</div>
 	</div>
