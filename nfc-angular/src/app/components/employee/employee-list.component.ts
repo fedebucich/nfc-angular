@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService } from "../shared/api.service";
-import { Employee, Status } from "../shared/model/employee";
-import { getDisplayValue, DisplayValue } from "../components/employee/d";
+import { ApiService } from "../../shared/api.service";
+import { Employee, Status } from "../../shared/model/employee";
+import { getDisplayValue, DisplayValue } from "../../components/employee/d";
 import { FilterType } from "./filter";
-import { StatusSelect } from "../components/employee/d";
-import "../../style/app.scss";
+import { StatusSelect } from "../../components/employee/d";
+import "../../../style/app.scss";
 
 @Component({
   selector: 'my-employess',
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  templateUrl: "./employee-list.component.html",
+  styleUrls: ["./employee-list.component.scss"]
 })
 export class EmployeesComponent implements OnInit {
   private data: Employee[] = [];

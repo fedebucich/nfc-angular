@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LogoComponent } from './index/logo.component';
 import { IndexComponent } from './index/index.component';
-import { EmployeesComponent } from './components/app.component';
+import { EmployeesComponent } from './components/employee/employee-list.component';
 import { ReportsDetailAccessRejectedComponent } from './reports/reports.access.rejected.component';
 import { ReportsDetailAccessEnterTodayComponent } from './reports/reports.access.enter.today.component';
 

@@ -4,14 +4,14 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular2-datatable';
 
-import { EmployeesComponent } from './components/app.component';
+import { EmployeesComponent } from './components/employee/employee-list.component';
 import { LogoComponent } from './index/logo.component';
 import { ReportsDetailAccessRejectedComponent } from './reports/reports.access.rejected.component';
 import { ReportsDetailAccessEnterTodayComponent } from './reports/reports.access.enter.today.component';
 import { EmployeeModalComponent } from './components/employee/edit-view.component';
 import { ConfirmationComponent } from './components/employee/confirmation-dialog/confirmation.component';
 import { ApiService } from './shared';
-import { MyFilterPipe } from '../app/components/filter';
+import { MyFilterPipe } from '../app/components/employee/filter';
 import { routing } from './app.routing';
 import { IndexComponent } from './index/index.component';
 
