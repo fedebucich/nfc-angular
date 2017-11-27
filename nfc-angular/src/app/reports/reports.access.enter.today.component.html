@@ -26,7 +26,7 @@
 								<tr *ngFor="let reportData of mf.data let i = index" [attr.data-index]="i">
 									<td class="text-center">{{ reportData.employeeExpedient }}</td>
 									<td class="text-center">{{ reportData.employeeFullName }}</td>
-									<td class="text-center">{{ reportData.date | date:'dd/mm/yyyy HH:mm:ss' }}</td>
+									<td class="text-center">{{ reportData.date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
 								</tr>
 							</tbody>
 							<tfoot>

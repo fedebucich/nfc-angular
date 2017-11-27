@@ -1,7 +1,7 @@
 import { Status, ScheduleWorkTime } from "../../shared/model/employee";
 
 export type DisplayValue = "Activo" | "Inactivo" | "Suspendido" | "Todos";
-export type DayLabel = "Domingo" | "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes";
+export type DayLabel = "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes";
 
 export type StatusSelect = {
   status: Status;
@@ -16,8 +16,6 @@ export function getDisplayValue(value: Status): DisplayValue {
 
 export function getDayLabel(workDay: ScheduleWorkTime): DayLabel {
     switch (workDay.dayNumber) {
-    case 0:
-      return "Domingo";   
     case 1:
       return "Lunes";
     case 2:
